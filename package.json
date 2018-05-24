@@ -1,0 +1,32 @@
+{
+  "name": "sweetjustice",
+  "version": "1.0.0",
+  "description": "collaborative project: music exploration site",
+  "main": "index.html",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/momentum-cohort-2018-04/vanilla-javascript-capstone-sweetjustice.git"
+  },
+  "author": "Alyssa Torres, Ben Miller",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/momentum-cohort-2018-04/vanilla-javascript-capstone-sweetjustice/issues"
+  },
+  "homepage": "https://github.com/momentum-cohort-2018-04/vanilla-javascript-capstone-sweetjustice#readme",
+  "dependencies": {
+    "babel-jest": "^22.4.4",
+    "jest": "^22.4.4",
+    "jquery": "^3.3.1"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.7.0"
+  }
+}
