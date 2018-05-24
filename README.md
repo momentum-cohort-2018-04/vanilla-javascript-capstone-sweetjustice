@@ -26,3 +26,4 @@ Twitter API:
 -possibly find share tweets or song title 
 -possibly find tweets *about* artist 
 
+site is up at http://sweet-justice.surge.sh/
