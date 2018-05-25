@@ -35,7 +35,6 @@ function geniusSearchArtist (term) {
   //     q: term
   //   })
     // .withCredentials()
-    // .set('User-Agent', 'CompuServe Classic/1.22')
     // .auth({'Authorization': 'Bearer ' + token})
     .set('Authorization', 'Bearer ' + token)
     .then(function (response) {
