@@ -20,9 +20,9 @@
   "dependencies": {
     "babel-jest": "^22.4.4",
     "concurrently": "^3.5.1",
+    "http-proxy": "^1.17.0",
     "jest": "^22.4.4",
     "jquery": "^3.3.1",
-    "oauth": "^0.9.15",
     "surge": "^0.20.1",
     "twitter-proxy": "^2.0.0"
   },
