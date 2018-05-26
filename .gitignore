@@ -2,3 +2,7 @@ node_modules
 dist
 .cache/
 code_bits.js
+tech_test.json
+.cache
+cache/
+song_desc.json

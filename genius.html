@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Page Title</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="./css/styles.scss" />
-  <script src="./js/Genius.js"></script>
-  <script src="./js/Twitter.js" defer></script>
+  <script src="./source/Genius.js"></script>
+  <script src="./source/Twitter.js" defer></script>
 </head>
+
 <body>
   <form id="search-form">
-      <input id="input" name="term" type=text>
-      <button type="submit"  class="send">Click </button>
+    <input id="input" name="term" type=text placeholder=" Search Artist">
+    <button type="submit" class="send">Click </button>
+  </form>
+  <form id="search-form-artistID">
+    <input id="input" name="term" type=text placeholder=" Search Artist ID">
+    <button type="submit" class="send">Click </button>
+  </form>
+  <form id="search-form-songID">
+    <input id="input" name="term" type=text placeholder=" Search Song ID">
+    <button type="submit" class="send">Click </button>
   </form>
 
-  
   <div id="results"></div>
 </body>
+
 </html>
