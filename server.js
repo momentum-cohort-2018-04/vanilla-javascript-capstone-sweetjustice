@@ -1,4 +1,5 @@
 // var http = require('http')
+require('dotenv').config()
 var httpProxy = require('http-proxy')
 //
 // Create your proxy server and set the target in the options.
@@ -6,6 +7,6 @@ var httpProxy = require('http-proxy')
 httpProxy.createProxyServer({
   changeOrigin: true,
   target: 'https://api.genius.com/',
-  headers: {'Authorization': 'Bearer ZlLSmhS4-K3TlAOvIFbGig39rqxTIahXvisPoBLzjo0gnikXxtrFakbexl1lxRSi'}
+  headers: {'Authorization': process.env.GENIUSTOKEN}
 }).listen(8500)
 console.log('listening on port 8500')

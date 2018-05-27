@@ -6,3 +6,4 @@ tech_test.json
 .cache
 cache/
 song_desc.json
+.env
