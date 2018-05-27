@@ -19,6 +19,8 @@
   "homepage": "https://github.com/momentum-cohort-2018-04/vanilla-javascript-capstone-sweetjustice#readme",
   "dependencies": {
     "babel-jest": "^22.4.4",
+    "bulma": "^0.7.1",
+    "bulma-start": "0.0.2",
     "concurrently": "^3.5.1",
     "dotenv": "^5.0.1",
     "http-proxy": "^1.17.0",

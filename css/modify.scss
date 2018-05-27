@@ -1,0 +1,122 @@
+@charset "utf-8";
+// Customization
+// You can easily customize Bulma with your own variables.
+// Just uncomment the following block to see the result.
+// 1. Import the initial variables
+@import "../node_modules/bulma/sass/utilities/initial-variables";
+// 2. Set your own initial variables
+// Update the blue shade, used for links
+$blue: #06bcef;
+// Add pink and its invert
+$teal: #0faf8c;
+$teal-invert: #fff;
+// Update the sans-serif font family
+$family-sans-serif: 'Questrial',
+sans-serif;
+$family-important: 'Squada One',
+cursive;
+$famile-headers: 'Righteous',
+cursive;
+// 3. Set the derived variables
+// Use the new pink as the primary color
+$primary: $teal;
+$primary-invert: $teal-invert;
+$gap: 64px;
+// 4. Import the rest of Bulma
+@import "../node_modules/bulma/bulma";
+.page {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  font-size: 1.25rem;
+  //maybe also dont need EXCEPT FOR FONT SIZE
+  padding: 1rem;
+  border: aqua dotted 2px;
+}
+.main {
+  flex: 1;
+  //maybe dont need
+  padding: 1rem;
+  border: chocolate solid 2px;
+}
+.section-body {
+  width: 80%;
+  margin: 0 auto;
+  border: red solid 2px;
+}
+.title {
+  font-size: 5rem;
+  position: relative;
+  top: 3rem;
+  padding: 1rem;
+  border: orchid solid 1px;
+  &-image{
+    border: blue dotted 3px;
+  }
+}
+#find{
+  padding: 0;
+
+  padding: .2rem;
+  border: yellowgreen solid 2px;
+}
+
+.media {
+  flex-direction: column;
+  width: 100%;
+  border: blueviolet dotted 4px;
+  &-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    border: purple 1px solid;
+    padding: 1rem;
+  }
+  &-left {
+    margin: auto auto;
+    width: auto;
+    padding: 1rem;
+    border: greenyellow solid 1px;
+  }
+  &-tweet {
+    padding: 2% 4% 0 2%;
+    border: yellow solid 2px;
+  }
+}
+
+
+.content {
+  &-section {
+    font-size: 2.5rem;
+    padding: 1rem;
+    border: grey dotted 2px;
+  }
+  &-header {
+    text-align: center; // padding: 1rem;
+    font-size: 2rem;
+    padding: 2rem;
+    border: burlywood dotted 3px;
+  }
+  &-body {
+    padding: .5rem 1rem;
+    padding: 2.5rem;
+    border: black dotted 4px;
+  }
+}
+
+
+.audio {
+  &-player {
+    width: 80%;
+    margin: 0 10%;
+    padding:1rem;
+    padding-top: 3rem;
+    border: orange dotted 1px;
+  }
+  &-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+  }
+}
