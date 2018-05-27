@@ -6,12 +6,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <!-- <title>Page Title</title> -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="./css/styles.scss" />
+
+  <link href="https://fonts.googleapis.com/css?family=Righteous|Squada+One|Questrial" rel="stylesheet">
+  <!-- <link rel="stylesheet" type="text/css" media="screen" href="./css/styles.scss" /> -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css"> -->
+  <link rel="stylesheet" type="text/css" media="screen" href="./css/modify.scss" />
   <!-- <script src="./src/Genius.js"></script>
   <script src="./src/Twitter.js" defer></script> -->
 </head>
 
-<body>
+<body class="page">
   <!-- <form id="search-form">
     <input id="input" name="term" type=text placeholder=" Search Artist">
     <button type="submit" class="send">Click </button>
@@ -24,39 +28,120 @@
     <input id="input" name="term" type=text placeholder=" Search Song ID">
     <button type="submit" class="send">Click </button>
   </form> -->
-  <intro class="intro">
-    <div class="brand">Behind the</div>
-    <div class="brand-image">
-      <img src="https://thumbs.dreamstime.com/b/music-equalizer-bars-electronic-bar-representing-beat-sound-reflection-black-background-34501314.jpg">
+  <main class="main">
+    <section class="hero">
+      <div class="hero-body">
+        <container class="container has-text-centered">
+          <h1 class="title">Behind the</h1>
+          <div class="title-image">
+            <img src="./media/AudioBars3.png">
+            <!-- <img src="https://thumbs.dreamstime.com/b/music-equalizer-bars-electronic-bar-representing-beat-sound-reflection-black-background-34501314.jpg"> -->
+          </div>
+        </container>
       </div>
-  </intro>
-  <main class="spotify">
-    <banner class="span">ARTIST NAME</banner>
-    <div class="share">
-      <block class="half half-left">
-        <img class="art" src="http://s3.amazonaws.com/hiphopdx-production/2016/12/Tech-N9ne-The-Storm-album-featured-image-762x572.jpg">
-      </block>
-      <block class="half half-right">
-        ARTIST INFO
-      </block>
+
+    </section>
+    <section class="section section-body">
+      <container class="container">
+        <banner class="level">
+          <div class="level-item">ARTIST NAME</div>
+        </banner>
+        <div class="columns">
+          <block class="column">
+            <div class="image">
+              <img class="art" src="http://s3.amazonaws.com/hiphopdx-production/2016/12/Tech-N9ne-The-Storm-album-featured-image-762x572.jpg">
+            </div>
+          </block>
+          <block class="column">
+            ARTIST INFO
+            <p>Getting the footer to stick to the bottom of pages with sparse content is something just about every Web developer has tried to tackle at some point in his or her career. And, for the most part, it’s a solved problem. Yet all the existing solutions have one significant shortcoming — they don’t work if the height of your footer is unknown.
+
+                Flexbox is a perfect fit for this type of problem. While mostly known for laying out content in the horizontal direction, Flexbox actually works just as well for vertical layout problems. All you have to do is wrap the vertical sections in a flex container and choose which ones you want to expand. They’ll automatically take up all the available space in their container.
+                
+                In the example below, the container is set to the height of the window, and the content area is told to expand as needed. (Note: in the vertical direction you need to specify a height for the container. This is different from the horizontal direction, which automatically expands to fit.)
+                
+                </p>
+          </block>
+
+        </div>
+
+        <banner class="level">
+          <div class="level-item">SONG NAME</div>
+        </banner>
+        <div class="columns">
+          <block class="column">
+            LYRICS
+            <p>
+                Getting the footer to stick to the bottom of pages with sparse content is something just about every Web developer has tried to tackle at some point in his or her career. And, for the most part, it’s a solved problem. Yet all the existing solutions have one significant shortcoming — they don’t work if the height of your footer is unknown.
+
+                Flexbox is a perfect fit for this type of problem. While mostly known for laying out content in the horizontal direction, Flexbox actually works just as well for vertical layout problems. All you have to do is wrap the vertical sections in a flex container and choose which ones you want to expand. They’ll automatically take up all the available space in their container.
+                
+                In the example below, the container is set to the height of the window, and the content area is told to expand as needed. (Note: in the vertical direction you need to specify a height for the container. This is different from the horizontal direction, which automatically expands to fit.)
+                
+                
+            </p>
+          </block>
+          <block class="column">
+            ANNOTATIONS
+            <p>Getting the footer to stick to the bottom of pages with sparse content is something just about every Web developer has tried to tackle at some point in his or her career. And, for the most part, it’s a solved problem. Yet all the existing solutions have one significant shortcoming — they don’t work if the height of your footer is unknown.
+
+                Flexbox is a perfect fit for this type of problem. While mostly known for laying out content in the horizontal direction, Flexbox actually works just as well for vertical layout problems. All you have to do is wrap the vertical sections in a flex container and choose which ones you want to expand. They’ll automatically take up all the available space in their container.
+                
+                In the example below, the container is set to the height of the window, and the content area is told to expand as needed. (Note: in the vertical direction you need to specify a height for the container. This is different from the horizontal direction, which automatically expands to fit.)
+                
+                </p>
+          </block>
+
+        </div>
+      </container>
+    </section>
+
+
+    <section class="section section-body">
+      <container class="container">
+        <banner class="level">
+          <div class="level-item">
+            TWITTER
+          </div>
+        </banner>
+        <article class="media">
+          <div class="container container-media">
+            <figure class="media-left">
+              <p class="image is-64x64">
+                <img src="https://bulma.io/images/placeholders/128x128.png">
+              </p>
+            </figure>
+            <div class="media-content">
+              <div class="content twitter-content">
+                <strong>John Smith</strong>
+                <small>@johnsmith</small>
+                <br>
+                <p class="tweet">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas
+                  non massa sem. Etiam finibus odio quis feugiat facilisis.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- </banner> -->
+        </article>
+
+      </container>
+    </section>
+    <div id="results">
+
     </div>
-
-    <banner class="span">SONG NAME</banner>
-    <div class="share">
-      <block class="half half-left">
-        LYRICS
-      </block>
-      <block class="half half-right">
-        Annotations
-      </block>
-
-    </div>
-
-    <banner class="span">TWITTER</banner>
   </main>
-  <div id="results">
-
-  </div>
+  <footer class="footer-fixed">
+    <section class="section section-body">
+      <div>
+        <audio class="audio-player" controls>
+          <source src="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/AudioPreview118/v4/b0/38/22/b03822b6-f59d-7541-24ec-876de0254b43/mzaf_6739111258026699895.plus.aac.p.m4a"></src>
+        </audio>
+      </div>
+    </section>
+  </footer>
 </body>
 
 </html>
