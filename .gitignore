@@ -2,8 +2,16 @@ node_modules
 dist
 .cache/
 code_bits.js
-tech_test.json
+
 .cache
 cache/
 song_desc.json
 .env
+
+
+tech_test.json
+kanye_test.json
+lilwayne_test.json
+
+pusha_artist.json
+wayne_artist.json
