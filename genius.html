@@ -24,7 +24,7 @@
         <container class="container has-text-centered">
           <h1 class="title">Behind the</h1>
           <div class="title-image">
-            <img src="./media/AudioBars2.png">
+            <img src="./media/AudioBars-rework.png">
             <!-- <img src="https://thumbs.dreamstime.com/b/music-equalizer-bars-electronic-bar-representing-beat-sound-reflection-black-background-34501314.jpg"> -->
           </div>
         </container>
@@ -36,14 +36,16 @@
         <div class="level-item">
           <form class="field has-addons" id="search-form">
             <div class="control">
-              <input class="input"  id="input" name="term" type=text placeholder=" Search Artist">
+              <input class="input"  id="input" name="artist" type=text placeholder=" Search Artist">
+              <input class="input"   name="song" type=text placeholder=" Search Song Name">
             </div>
             <div class="control">
               <button type="submit" class="button send is-dark">Click </button>
             </div>
           </form>
         </div>
-        <div class="level-item">
+        
+        <!-- <div class="level-item">
             <form class="field has-addons" id="search-form-artistID">
               <div class="control">
                 <input class="input"  id="input" name="term" type=text placeholder=" Search Artist ID">
@@ -62,7 +64,7 @@
                   <button type="submit" class="button send is-dark">Click </button>
                 </div>
               </form>
-            </div>
+            </div> -->
 
       </banner>
     </section>
@@ -75,10 +77,11 @@
         </banner>
         <div class="columns">
           <block class="column">
-              <h3 class="content-header">ARTIST INFO</h3>
+              <h3 class="content-header">THE ARTIST</h3>
               <div class="content-body">
             <div class="image">
               <img class="art" id="artistimage" src="http://s3.amazonaws.com/hiphopdx-production/2016/12/Tech-N9ne-The-Storm-album-featured-image-762x572.jpg">
+              <!-- <img class="noresult" src="./media/no-genius_faded.png"> -->
             </div>
             <!-- <p id="albuminfo">
               </p> -->
@@ -120,13 +123,7 @@
               </div>
             </div>
             <div class="content-body">
-              <p id="songinfo">Flexbox is a perfect fit for this type of problem. While mostly known for laying out content in the horizontal
-                direction, Flexbox actually works just as well for vertical layout problems. All you have to do is wrap the
-                vertical sections in a flex container and choose which ones you want to expand. They’ll automatically take
-                up all the available space in their container In the example below, the container is set to the height of
-                the window, and the content area is told to expand as needed. (Note: in the vertical direction you need to
-                specify a height for the container. This is different from the horizontal direction, which automatically
-                expands to fit.)
+              <p id="songinfo">
               </p>
             </div>
           </block>

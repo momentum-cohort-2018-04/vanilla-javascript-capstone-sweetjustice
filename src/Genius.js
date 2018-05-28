@@ -1,45 +1,52 @@
 import $ from 'jquery'
 import request from 'superagent'
 import postscribe from 'postscribe'
+import Twitter from './Twitter'
 
+let ARTISTID = ''
 let SONGID = ''
 let TWITTERNAME = ''
+// const noresultSRC = './media/no-genius_faded.png'
+const noresultSRC = '/no-genius_faded.351f7402.png'
+
 $(document).ready(function () {
   $('#search-form').submit(function (event) {
     event.preventDefault()
     const result = $(this).serializeArray()
-    const queryKey = result[0].value
-    // const queryUrl = encodeURI(queryKey)
-    // const queryUrl2 = encodeURIComponent(queryKey)
-    // console.log(queryUrl)
-    // console.log(queryUrl2)
+    console.log(result)
+    const artistkey = result[0].value
+    const tweetlist = new Twitter(artistkey)
+    tweetlist.twittersearch()
+    const songvalue = result[1].value
+    const songkey = convertCase(songvalue)
+    const newGeniusSearch = new Genius(artistkey)
     this.reset()
-    const newGeniusSearch = new Genius(queryKey)
-    // const geniusSearchResults = newGeniusSearch.geniusSearch()
     newGeniusSearch.geniusSearch()
-  })
-  $('#search-form-artistID').submit(function (event) {
-    event.preventDefault()
-    const result = $(this).serializeArray()
-    const queryKey = result[0].value
-    this.reset()
-    const geniusArtist = new Genius(queryKey)
-    geniusArtist.geniusSearchArtist()
-    // geniusArtist.geniusSearchArtistforSongs('A Milli')
-    // setTimeout(function () {
-    //   console.log('geniusSongID', SONGID)
-    // }, 500)
-    // geniusSearchArtist(queryKey)
-  })
-  $('#search-form-songID').submit(function (event) {
-    event.preventDefault()
-    const result = $(this).serializeArray()
-    const queryKey = result[0].value
-    this.reset()
-    const geniusSong = new Genius(queryKey)
-    // geniusSearchSongID(queryKey)
-    // const geniusSongResults = geniusSong.geniusSearchSongID()
-    geniusSong.geniusSearchSongID()
+    // sets ARTISTID, builds artist html
+    setTimeout(function () {
+      console.log('ran genius search artist')
+      newGeniusSearch.geniusSearchArtist(ARTISTID)
+      // creates artist html
+      setTimeout(function () {
+        newGeniusSearch.geniusSearchArtistforSongs(songkey)
+        // sets SONGID
+        setTimeout(function () {
+          console.log('geniusSongID', SONGID)
+          console.log('geniusSongID Boolean', Boolean(SONGID))
+          if (SONGID) {
+            newGeniusSearch.geniusSearchSongID(SONGID)
+          } else {
+            console.log('NO SONG ID')
+            const innerHTML = newGeniusSearch.noDataResponse()
+            console.log('NO SONG ID innerHTML', innerHTML)
+            $('#lyrics').html(innerHTML)
+            $('#songart').attr('src', noresultSRC)
+          }
+          // embeds lyrics and extracts data
+          console.log('twitter?', TWITTERNAME)
+        }, 1500)
+      }, 1500)
+    }, 1000)
   })
 })
 
@@ -51,57 +58,53 @@ class Genius {
   convertURL () {
     return encodeURI(this.term)
   }
-
   geniusSearch () {
     this.search = this.convertURL()
     const self = this
     request.get(`http://localhost:8500/search?q=${this.search}&sort=popularity`)
       .then(function (response) {
-        // console.log(response)
         const geniusInfo = JSON.parse(response.text)
-        // console.log('geniusinfo', geniusInfo)
         const geniusarray = geniusInfo.response.hits
-        // console.log(geniusarray)
         self.getArtistId(geniusarray)
-        // console.log(result)
+        // sets ARTISTID
       })
   }
 
   getArtistId (array) {
-    // console.log(array)
+    console.log('ran get artist ID')
     const artistIds = []
     const primaryArtistName = []
     for (var i = 0; i < array.length; i++) {
       artistIds.push(array[i].result.primary_artist.id)
       primaryArtistName.push(array[i].result.primary_artist.name)
     }
-    // console.log(artistIds)
-    // console.log(primaryArtistName)
     checkRepeats(artistIds)
   }
 
   geniusSearchArtistforSongs (string) {
+    console.log('ran genius search artist for songs')
     const self = this
-    request.get(`http://localhost:8500/artists/${self.term}/songs/?sort=popularity&per_page=50`)
+    request.get(`http://localhost:8500/artists/${ARTISTID}/songs/?sort=popularity&per_page=50`)
       .then(function (response) {
         const geniusInfo = JSON.parse(response.text)
         const geniusarray = geniusInfo.response.songs
-        // const songartistArray = self.filtersongNames(geniusarray)
-        // SONGID = self.ifcontains(songartistArray, string)
+        const songartistArray = self.filtersongNames(geniusarray)
+        setTimeout(function () {
+          const answer = self.ifcontains(songartistArray, string)
+          SONGID = answer
+          console.log('inside searchartist for songs, SONGID', SONGID)
+        }, 400)
       })
   }
-  geniusSearchArtist () {
+  geniusSearchArtist (ARTISTID) {
     const self = this
-    request.get(`http://localhost:8500/artists/${self.term}`)
+    console.log('ran genius search artst')
+    request.get(`http://localhost:8500/artists/${ARTISTID}`)
       .then(function (response) {
         const geniusInfo = JSON.parse(response.text)
-        // console.log(geniusInfo)
         const geniusarray = geniusInfo.response.artist
-        console.log(geniusarray)
+        // console.log(geniusarray)
         self.buildArtist(geniusarray)
-
-        // const songartistArray = self.filtersongNames(geniusarray)
-        // SONGID = self.ifcontains(songartistArray, string)
       })
   }
 
@@ -114,64 +117,77 @@ class Genius {
     const artistimage = object.image_url
     const artistDescription = object.description.dom.children
     const htmlDesc = this.convertDescription(artistDescription)
-    console.log(TWITTERNAME)
-    $('#artistimage').attr('src', artistimage)
-    const innerHTML = `
-    <h4>${name}</h4>
-    <small>${altNames}</small>
-    <br>
-    <p>${htmlDesc}</p>
-    `
-    $('#artistinfo').html(innerHTML)
+    console.log('build artist- twittername', TWITTERNAME)
+    if (name && altNames && htmlDesc && artistimage) {
+      const innerHTML = `
+        <h4 class="bio-name">${name}</h4>
+        <small class="bio-alt">${altNames}</small>
+        <br>
+        <p class="bio-p">${htmlDesc}</p>`
+      $('#artistimage').attr('src', artistimage)
+      $('#artistinfo').html(innerHTML)
+      $('#artistname').html(name)
+    } else if (name && htmlDesc && artistimage) {
+      const innerHTML = `
+        <h4>${name}</h4>
+        <br>
+        <p>${htmlDesc}</p>
+        `
+      $('#artistimage').attr('src', artistimage)
+      $('#artistinfo').html(innerHTML)
+      $('#artistname').html(name)
+    } else {
+      const innerHTML = this.noDataResponse()
+      $('#artistname').html('<i>Artist Not Found</i>')
+      $('#artistinfo').html(innerHTML)
+      $('#artistimage').attr('src', noresultSRC)
+    }
   }
 
   ifcontains (arrayObj, string) {
     console.log('ran if contains')
-    // if (string === '') {
-    //   string = 'A Milli'
-    // }
     for (var song of arrayObj) {
-      // console.log('song', song)
       const trackname = song.track
-      // console.log('trackname', trackname)
-      // console.log('type', typeof (trackname))
       if (trackname.includes(string)) {
-        // console.log('STRINGADINGING', string)
-        // console.log(song)
-        // console.log(song.id)
+        console.log('track was listed')
         return song.id
       }
     }
   }
 
-  geniusSearchSongID () {
+  geniusSearchSongID (SONGID) {
     const self = this
-    request.get(`http://localhost:8500/songs/${self.term}`)
+    request.get(`http://localhost:8500/songs/${SONGID}`)
       .then(function (response) {
         const geniusInfo = JSON.parse(response.text)
         const geniusSong = geniusInfo.response.song
-        // console.log('the genius SOng', geniusSong)
         self.getData(geniusSong)
         const lyricsEmbed = self.makeEmbed(geniusSong)
-        // console.log('lyricsEmbed', lyricsEmbed)
-        postscribe('#lyrics', lyricsEmbed)
-        // $('#lyrics').html(lyricsEmbed)
+        if (geniusInfo && geniusSong && lyricsEmbed) {
+          postscribe('#lyrics', lyricsEmbed)
+          // $('#lyrics').html(lyricsEmbed)
+        } else {
+          const innerHTML = this.noDataResponse()
+          $('#lyrics').html(innerHTML)
+        }
       })
   }
 
   filtersongNames (array) {
+    console.log('ran filter song names')
     const songNames = []
     for (var i = 0; i < array.length; i++) {
       let entry = array[i]
-      songNames.push({'track': `${entry.full_title}`, 'id': entry.id})
+      songNames.push({
+        'track': `${entry.full_title}`,
+        'id': entry.id
+      })
     }
-    // console.log(songNames)
     return songNames
   }
 
   getData (songEntry) {
-    // console.log('songEntry', typeof (songEntry), songEntry)
-    // console.log(Object.keys(songEntry))
+    console.log('RAN THE GETTING OF DATA')
     const songTitle = songEntry.title
     // "A Certain Comfort"
     const songFullTitle = songEntry['full_title']
@@ -201,27 +217,26 @@ class Genius {
       const albumArt = songEntry.album.cover_art_url
       $('#albumart').attr('src', albumArt)
     }
+    if (!(songEntry.album)) {
+      const innerHTML = this.noDataResponse()
+      $('#albuminfo').html(innerHTML)
+      $('#albumart').attr('src', noresultSRC)
+    }
 
-    console.log('song desc', songDescription)
+    // console.log('song desc', songDescription)
     const htmlDesc = this.convertDescription(songDescription)
     $('#songinfo').html(htmlDesc)
   }
-
   convertDescription (array) {
-    console.log('array', array)
+    console.log('DESCRIPTION array', array)
     const paragraph = []
     for (var entry of array) {
       console.log('entry of array', entry)
       if (entry) {
         if (entry.tag === 'p') {
           let childarray = entry.children
-          console.log('childarray', childarray)
           for (var i = 0; i < childarray.length; i++) {
-            // console.log('i', typeof (childarray[i]), childarray[i])
             let childentry = childarray[i]
-            console.log('childentry', childentry)
-            console.log('childentry type', typeof (childentry))
-            console.log(Boolean(typeof (childentry) === 'object'))
             if (typeof (childentry) === 'string') {
               paragraph.push(childentry)
             } else if (typeof (childentry) === 'object') {
@@ -229,14 +244,17 @@ class Genius {
                 paragraph.push(childentry.children)
               }
               if (childentry.tag === 'a') {
-                if (childentry.attributes.hasOwnProperty('href')) {
+                console.log('childentry', Boolean((childentry.tag === 'a')), childentry)
+                if (childentry.attributes.hasOwnProperty('rel')) {
+                  console.log('children includes http')
                 } else {
-                  paragraph.push(childentry.children[0])
+                  console.log('no href, has children', childentry.children)
+                  let baby = childentry.children
+                  paragraph.push(baby[0])
                 }
               }
             } else if (Array.isArray(childentry)) {
               for (var x of childentry) {
-                // console.log('x', x)
                 if (typeof (x.children) === 'string') {
                   paragraph.push(x.children)
                 }
@@ -246,7 +264,6 @@ class Genius {
         }
       }
     }
-    // console.log('paragraph', paragraph)
     const completeDescription = paragraph.join('')
     console.log(completeDescription)
     return completeDescription
@@ -258,64 +275,41 @@ class Genius {
     const songFullTitle = songEntry['full_title']
     return `<div id='rg_embed_link_${songid}' class='rg_embed_link' data-song-id='${songid}'>Read <a href='${songUrl}'>"${songFullTitle}"</a> on Genius</div> <script crossorigin src='//genius.com/songs/${songid}/embed.js'></script>`
   }
+
+  noDataResponse () {
+    return `
+    <div class="image">
+      <img class="noresult" src="/no-genius_faded.351f7402.png">
+    </div>`
+  }
 }
 
-// function geniusSearch (term) {
-//   request.get(`http://localhost:8500/search?q=${term}`)
-//     .then(function (response) {
-//       // console.log(response)
-//       const geniusInfo = JSON.parse(response.text)
-//       // console.log('geniusinfo', geniusInfo)
-//       const geniusarray = geniusInfo.response.hits
-//       // console.log(geniusarray)
-//       getArtistId(geniusarray)
-//     })
-// }
-
-// function getArtistId (array) {
-//   const artistIds = []
-//   const primaryArtistName = []
-//   for (var i = 0; i < array.length; i++) {
-//     artistIds.push(array[i].result.primary_artist.id)
-//     primaryArtistName.push(array[i].result.primary_artist.name)
-//   }
-//   console.log(artistIds)
-//   console.log(primaryArtistName)
-//   // checkRepeats(artistIds)
-// }
 const idandrepeat = []
+
 function checkRepeats (array) {
   let test = array[0]
   let counter = 0
-
   for (var i = 0; i < array.length; i++) {
-    // console.log('value', array[i], 'index', i)
-    // console.log('array length', array.length)
     if (test === array[i]) {
-      // console.log('array.presplice', array)
       array.splice((i), 1)
       counter += 1
       i -= 1
-      // console.log('array', array)
-      // console.log('length', array.length)
-      // console.log('counter', counter)
-      // console.log('=======+========')
     } else {
       console.log('different', array[i])
-      // console.log('=======+========')
     }
   }
-  idandrepeat.push({'theID': test, 'count': counter})
-  // console.log('idrepeat', idandrepeat)
-  // console.log(array.length)
+  idandrepeat.push({
+    'theID': test,
+    'count': counter
+  })
   if (array.length > 0) {
     return checkRepeats(array)
   } else {
-    // console.log(idandrepeat)
     console.log(getMaxCount(idandrepeat))
     const thewinner = getMaxCount(idandrepeat)
     console.log(thewinner.theID)
-    return thewinner.theID
+    ARTISTID = thewinner.theID
+    // return thewinner.theID
   }
 }
 
@@ -323,30 +317,15 @@ function getMaxCount (arrayObjects) {
   const max = arrayObjects.reduce((prev, current) => (prev.count > current.count) ? prev : current, 1)
   return max
 }
-// function geniusSearchArtist (term) {
-//   request.get(`http://localhost:8500/artists/${term}/songs`)
-//     .then(function (response) {
-//       const geniusInfo = JSON.parse(response.text)
-//       const geniusarray = geniusInfo.response.songs
-//       songNames(geniusarray)
-//     })
-// }
 
-// function geniusSearchSongID (term) {
-//   request.get(`http://localhost:8500/songs/${term}`)
-//     .then(function (response) {
-//       const geniusInfo = JSON.parse(response.text)
-//       const geniusSong = geniusInfo.response.song
-//       console.log(geniusSong)
-//     })
-// }
-
-// function songNames (array) {
-//   const songNames = []
-//   for (var i = 0; i < array.length; i++) {
-//     let entry = array[i]
-//     songNames.push({'track': `${entry.full_title}`, 'id': entry.id})
-//   }
-//   console.log(songNames)
-//   return songNames
-// }
+function convertCase (string) {
+  let stringArray = string.split(' ')
+  for (var i of stringArray) {
+    var lowercase = i.substr(1)
+    var uppercase = i.charAt(0).toUpperCase()
+    var newWord = uppercase + lowercase
+    var indexnumb = stringArray.indexOf(i)
+    stringArray.splice(indexnumb, 1, newWord)
+  }
+  return stringArray.join(' ')
+}

@@ -95,10 +95,24 @@ $family-headers: 'Righteous', sans-serif;
 
 }
 
-
-h2, h3 {
+h2, h3, h4 {
   font-family: $family-headers;
 }
+
+.bio {
+  &-name{
+    font-size: 2.5rem;
+  }
+  &-alt{
+    font-size: 1.35rem;
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+  &-p{
+    padding-top: 1rem;
+  }
+}
+
 .content {
   &-section {
     font-size: 2.5rem;
