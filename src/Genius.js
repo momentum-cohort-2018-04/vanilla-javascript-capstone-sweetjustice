@@ -65,6 +65,7 @@ class Genius {
       .then(function (response) {
         const geniusInfo = JSON.parse(response.text)
         const geniusarray = geniusInfo.response.hits
+        console.log('Genius Array', geniusarray)
         self.getArtistId(geniusarray)
         // sets ARTISTID
       })
@@ -228,10 +229,10 @@ class Genius {
     $('#songinfo').html(htmlDesc)
   }
   convertDescription (array) {
-    console.log('DESCRIPTION array', array)
+    // console.log('DESCRIPTION array', array)
     const paragraph = []
     for (var entry of array) {
-      console.log('entry of array', entry)
+      // console.log('entry of array', entry)
       if (entry) {
         if (entry.tag === 'p') {
           let childarray = entry.children
@@ -244,11 +245,11 @@ class Genius {
                 paragraph.push(childentry.children)
               }
               if (childentry.tag === 'a') {
-                console.log('childentry', Boolean((childentry.tag === 'a')), childentry)
+                // console.log('childentry', Boolean((childentry.tag === 'a')), childentry)
                 if (childentry.attributes.hasOwnProperty('rel')) {
-                  console.log('children includes http')
+                  // console.log('children includes http')
                 } else {
-                  console.log('no href, has children', childentry.children)
+                  // console.log('no href, has children', childentry.children)
                   let baby = childentry.children
                   paragraph.push(baby[0])
                 }
@@ -329,3 +330,5 @@ function convertCase (string) {
   }
   return stringArray.join(' ')
 }
+
+export default Genius

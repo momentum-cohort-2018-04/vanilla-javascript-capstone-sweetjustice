@@ -16,8 +16,13 @@ $family-sans-serif: 'Questrial', sans-serif;
 $primary: $teal;
 $primary-invert: $teal-invert;
 //PERSONAL settings
-$tweetbackground: rgb(233, 230, 230);
+$tweetbackground: rgb(243, 241, 241);
 $family-headers: 'Righteous', sans-serif;
+$sectioncolors: rgb(245, 240, 240);
+$sectioncolors: white;
+// $bodybackground: rgb(247, 245, 245);
+$bodybackground: white;
+
 
 @import "../node_modules/bulma/bulma";
 
@@ -27,38 +32,29 @@ $family-headers: 'Righteous', sans-serif;
   flex-direction: column;
   font-size: 1.25rem;
   //maybe also dont need EXCEPT FOR FONT SIZE
-  padding: 1rem;
-  border: aqua dotted 2px;
+  
 }
 .main {
   flex: 1;
   //maybe dont need
-  padding: 1rem;
-  border: chocolate solid 2px;
+  
 }
 .section-body {
   width: 80%;
   margin: 0 auto;
-
-  border: red solid 2px;
+  background-color: $bodybackground;
 }
 .title {
   font-size: 5rem;
   position: relative;
   font-family: $family-headers;
-  top: 3rem;
-
-  padding: 1rem;
-  border: orchid solid 1px;
-  &-image{
-    border: blue dotted 3px;
-  }
+  top: 2rem;
+  // &-image{
+  //   border: blue dotted 3px;
+  // }
 }
 #find{
   padding: 0;
-
-  padding: .2rem;
-  border: yellowgreen solid 2px;
 }
 
 .media {
@@ -118,17 +114,23 @@ h2, h3, h4 {
     font-size: 2.5rem;
     padding: 1rem;
     border: grey dotted 2px;
+    
   }
   &-header {
     text-align: center; // padding: 1rem;
     font-size: 2rem;
-    padding: 2rem;
-    border: burlywood dotted 3px;
+    padding: .25rem;
+    // box-shadow: inset 0px 0px 33px 1px rgba(227,227,227,0.45);
+    border: rgba(227, 227, 227, 0.377) solid 1px;
+    background-color: rgba(227, 227, 227, 0.377);
+    box-shadow: -2px 2px 8px 1px rgba(227,227,227,0.42);
+    border-radius: .5rem;
   }
   &-body {
     padding: .5rem 1rem;
     padding: 2.5rem;
-    border: black dotted 4px;
+    // box-shadow: inset 0px 0px 33px 1px rgba(227,227,227,0.45);
+    // background-color: rgba(227, 227, 227, 0.377);
   }
 }
 
@@ -138,7 +140,6 @@ h2, h3, h4 {
     margin: 0 10%;
     padding:1rem;
     padding-top: 3rem;
-    border: orange dotted 1px;
   }
   &-footer {
     position: fixed;

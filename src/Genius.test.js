@@ -1,2 +1,3 @@
-test(thisish)
-expect(nothing)
+import $ from 'jquery'
+import request from 'superagent'
+import Genius from './Genius'

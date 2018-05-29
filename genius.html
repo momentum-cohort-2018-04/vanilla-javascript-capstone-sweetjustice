@@ -10,9 +10,8 @@
   <link href="https://fonts.googleapis.com/css?family=Righteous|Squada+One|Questrial" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/postscribe/2.0.8/postscribe.min.js"></script>
   <!-- <link rel="stylesheet" type="text/css" media="screen" href="./css/styles.scss" /> -->
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css"> -->
   <link rel="stylesheet" type="text/css" media="screen" href="./css/modify.scss" />
-  <script src="./src/Genius.js"></script>
+  <script src="./src/Genius.js" defer></script>
   <!-- <script src="./src/Twitter.js" defer></script>  -->
 </head>
 
@@ -25,7 +24,6 @@
           <h1 class="title">Behind the</h1>
           <div class="title-image">
             <img src="./media/AudioBars-rework.png">
-            <!-- <img src="https://thumbs.dreamstime.com/b/music-equalizer-bars-electronic-bar-representing-beat-sound-reflection-black-background-34501314.jpg"> -->
           </div>
         </container>
       </div>
@@ -37,7 +35,7 @@
           <form class="field has-addons" id="search-form">
             <div class="control">
               <input class="input"  id="input" name="artist" type=text placeholder=" Search Artist">
-              <input class="input"   name="song" type=text placeholder=" Search Song Name">
+              <input class="input"  name="song" type=text placeholder=" Search Song Name">
             </div>
             <div class="control">
               <button type="submit" class="button send is-dark">Click </button>
@@ -81,27 +79,18 @@
               <div class="content-body">
             <div class="image">
               <img class="art" id="artistimage" src="http://s3.amazonaws.com/hiphopdx-production/2016/12/Tech-N9ne-The-Storm-album-featured-image-762x572.jpg">
-              <!-- <img class="noresult" src="./media/no-genius_faded.png"> -->
             </div>
-            <!-- <p id="albuminfo">
-              </p> -->
             </div>
           </block>
           <block class="column">
             <h3 class="content-header">ARTIST INFO</h3>
             <div class="content-body">
               <p id="artistinfo">
-                Getting the footer to stick to the bottom of pages with sparse content is something just about every Web developer has tried
-                to tackle at some point in his or her career. And, for the most part, it’s a solved problem. Yet all the
-                existing solutions have one significant shortcoming — they don’t work if the height of your footer is unknown.
-                Flexbox is a perfect fit for this type of problem. While mostly known for laying out content in the horizontal
-                direction, Flexbox actually works just as well for vertical layout problems. All you have to do is wrap the
-                vertical sections in a flex container and choose which ones you want to expand. They’ll automatically take
-                up all the available space in their container. 
+                Tristique orci, euismod mattis. Ante interdum cubilia pharetra curae; dis hendrerit scelerisque massa. Pellentesque consequat nisi accumsan laoreet integer risus eget ac scelerisque pharetra nullam iaculis amet condimentum. Rhoncus a vehicula consequat sodales. Duis. Feugiat libero eget eros lorem proin, nibh.
+                Massa vulputate mauris semper elit sapien congue viverra nam pharetra. Adipiscing laoreet augue enim netus a fringilla tristique rutrum lacinia massa litora accumsan pharetra accumsan. Eros cubilia sollicitudin magnis dictum orci, eu lectus fames metus. Quisque nam hendrerit platea vulputate dignissim condimentum aptent proin malesuada.
               </p>
             </div>
           </block>
-
         </div>
 
         <banner class="level">
@@ -127,7 +116,6 @@
               </p>
             </div>
           </block>
-
         </div>
       </container>
     </section>
@@ -159,7 +147,6 @@
               </div>
             </div>
           </div>
-          <!-- </banner> -->
           <div class="container media-container">
             <figure class="media-left">
               <p class="image is-96x96">
@@ -178,7 +165,6 @@
               </div>
             </div>
           </div>
-          <!-- aasdasdasd -->
           <div class="container media-container">
             <figure class="media-left">
               <p class="image is-96x96">
@@ -197,7 +183,6 @@
               </div>
             </div>
           </div>
-          <!-- asdasdaasd -->
         </article>
 
       </container>
@@ -207,14 +192,12 @@
     </div>
   </main>
   <footer class="audio-footer">
-    <!-- <section class="section section-body"> -->
     <div>
       <audio class="audio-player" controls>
         <source src="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/AudioPreview118/v4/b0/38/22/b03822b6-f59d-7541-24ec-876de0254b43/mzaf_6739111258026699895.plus.aac.p.m4a">
         </src>
       </audio>
     </div>
-    <!-- </section> -->
   </footer>
 </body>
 
