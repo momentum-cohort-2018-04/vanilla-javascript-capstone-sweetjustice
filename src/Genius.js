@@ -42,11 +42,12 @@ $(document).ready(function () {
             $('#lyrics').html(innerHTML)
             $('#songart').attr('src', noresultSRC)
           }
+          $('.response').removeClass('none')
           // embeds lyrics and extracts data
           console.log('twitter?', TWITTERNAME)
-        }, 1500)
-      }, 1500)
-    }, 1000)
+        }, 700)
+      }, 1700)
+    }, 700)
   })
 })
 
